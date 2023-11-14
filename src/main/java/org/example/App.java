@@ -1,3 +1,4 @@
+
 package org.example;
 
 
@@ -13,6 +14,11 @@ import org.example.database.utils.FlywayMigration;
 import org.example.database.utils.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+
 public class App {
 
     private static final Logger LOG = LogManager.getLogger(App.class);
@@ -28,9 +34,9 @@ public class App {
         newClient.setName("Oleg");
         clientCrud.persist(newClient);
 
-        Client client = clientCrud.getById(2L);
+        Client client = clientCrud.getById(2);
 
-        client.setName("Bob");
+        client.setName("Eve");
 
         clientCrud.merge(client);
 
@@ -40,11 +46,11 @@ public class App {
         PlanetCrud planetCrud = new PlanetCrud();
 
         Planet newPlanet = new Planet();
-        newPlanet.setId("NEPTUNE");
-        newPlanet.setName("Neptune");
+        newPlanet.setId("SIRI");
+        newPlanet.setName("Siri");
         planetCrud.persist(newPlanet);
 
-        Planet planet = planetCrud.getById("MARS");
+        Planet planet = planetCrud.getById("SATURN");
 
         planet.setId("EAR");
         planet.setName("Earth");
@@ -54,19 +60,23 @@ public class App {
 
 
 
+
         TicketCrud ticketCrud = new TicketCrud();
 
-        Ticket newTicket = new Ticket();
 
         Planet fromPlanet = planetCrud.getById("VENUS");
         Planet toPlanet = planetCrud.getById("JUPITER");
+        Client client1 = clientCrud.getById(5);
+
+        Ticket newTicket = new Ticket();
 
         newTicket.setFromPlanet(fromPlanet);
         newTicket.setToPlanet(toPlanet);
-        newTicket.setClient(client);
+        newTicket.setClient(client1);
+        newTicket.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         ticketCrud.persist(newTicket);
 
-        Ticket ticket = new Ticket();
+        Ticket ticket = ticketCrud.getById(5);
 
         ticket.setToPlanet(toPlanet);
         ticketCrud.merge(ticket);

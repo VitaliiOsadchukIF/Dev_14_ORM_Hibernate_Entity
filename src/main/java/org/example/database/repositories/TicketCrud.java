@@ -22,7 +22,7 @@ public class TicketCrud implements Crud<Ticket> {
     @Override
     public Ticket getById(Object id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.get(Ticket.class, (String) id);
+            return session.get(Ticket.class, id);
         }
     }
 

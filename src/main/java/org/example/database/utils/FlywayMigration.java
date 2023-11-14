@@ -19,7 +19,6 @@ public class FlywayMigration {
      */
     private FlywayMigration() {
     }
-
     /**
      * Виконує міграцію бази даних за допомогою Flyway для підтримки послідовності схеми бази даних.
      */

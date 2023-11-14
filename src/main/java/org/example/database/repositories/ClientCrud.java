@@ -33,7 +33,7 @@ public class ClientCrud implements Crud<Client> {
     @Override
     public Client getById(Object id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.get(Client.class, (Long) id);
+            return session.get(Client.class, id);
         }
     }
 

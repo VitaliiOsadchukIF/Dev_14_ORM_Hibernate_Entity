@@ -1,14 +1,14 @@
 -- Create the Client table
 CREATE TABLE client (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL
+    name_ VARCHAR(200) NOT NULL
 );
 
 -- Create the Planet table
-z
+
 CREATE TABLE planet (
     id VARCHAR(10) PRIMARY KEY,
-    name VARCHAR(500) NOT NULL
+    name_ VARCHAR(500) NOT NULL
 );
 
 
@@ -20,6 +20,6 @@ CREATE TABLE ticket (
     from_planet_id VARCHAR(10),
     to_planet_id VARCHAR(10),
     FOREIGN KEY (client_id) REFERENCES client(id),
-    FOREIGN KEY (from_planet_id) REFERENCES planet(id)  -- References the starting planet
+    FOREIGN KEY (from_planet_id) REFERENCES planet(id),  -- References the starting planet
     FOREIGN KEY (to_planet_id) REFERENCES planet(id)    -- References the destination planet
 );

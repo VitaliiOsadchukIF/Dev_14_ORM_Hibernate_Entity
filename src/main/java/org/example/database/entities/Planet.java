@@ -1,23 +1,52 @@
-package org.example.database.entities;
 
+package org.example.database.entities;
 
 import lombok.Data;
 import jakarta.persistence.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
-// Анотація @Entity вказує, що цей клас є сутністю, яку можна зберігати в базі даних.
 @Data
 @Entity
 @Table(name = "planet")
 public class Planet {
-    // Анотація @Id позначає поле як ідентифікатор.
+
+    private static final Logger LOG = LogManager.getLogger(Planet.class);
+
     @Id
     @Column(name = "id", length = 10)
     private String id;
 
-    // Анотація @Column вказує назву стовпця в таблиці та його властивості.
-    @Column(name = "name", length = 500, nullable = false)
+    @Column(name = "name_", length = 500, nullable = false)
     private String name;
 
+//    A callback method that logs when a new planet is persisted to the database.
+
+    @PostPersist
+    public void logNewClientPersisted() {
+        LOG.info("Persisted planet: '{}'", name);
+    }
+
+//    A callback method that logs when a planet is loaded from the database.
+
+    @PostLoad
+    public void logUserLoad() {
+        LOG.info("Loaded planet: '{}'", name);
+    }
+
+//    A callback method that logs when a planet is updated in the database.
+
+    @PostUpdate
+    public void logUserUpdate() {
+        LOG.info("Updated planet: '{}'", name);
+    }
+
+//    A callback method that logs when a planet is removed from the database.
+
+    @PostRemove
+    public void logPlanetRemove() {
+        LOG.info("Deleted planet: '{}'", name);
+    }
 
 }
